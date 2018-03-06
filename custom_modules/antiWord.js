@@ -1,18 +1,24 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-var config = require('./config'); //Load the configuration from config.js
-const token = config.token; //The token for the bot.
+var logger = require("../functions/logger"); //Load the configuration from config.js
+var path = require('path');
+path = path.basename(__filename)
 
-client.on('ready', () => {
-    console.log('I am ready!');
-});
+var wordsToDelete = ["kappa", "kapa"];
 
-client.on('message', message => {
-	messageString = message.content.toLowerCase().split().join("").replace(/[^0-9a-z]/gi, '')
-	console.log(messageString)
-    if (messageString.indexOf("kapa") > -1 || messageString.indexOf("kappa") > -1) {
-    	message.delete()
+var antiWord = {
+    loadModule: (client) => {
+        client.on('message', message => {
+            try {
+                messageString = message.content.toLowerCase().split().join("").replace(/[^0-9a-z]/gi, '')
+                for (string in wordsToDelete) {
+                	if (messageString.indexOf(wordsToDelete[string]) > -1) {
+                		message.delete();
+                	}
+                }
+            } catch (err) {
+                logger.log(err, path);
+            }
+        });
     }
-});
+};
 
-client.login(token);
+module.exports = antiWord;

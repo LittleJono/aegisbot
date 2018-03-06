@@ -232,22 +232,6 @@ var foobar = setInterval(function() {
     }
 }, 5000)
 
-var botLoggingIn = setInterval(function() {
-    console.log("Attempting to connect.");
-    client.login(token);
-}, 5000);
-
-
-process.on('SIGINT', function() {
-    logAndDisplay('Received SIGINT... Shutting down', true);
-    clearInterval(foobar)
-    client.guilds.get(guildID).channels.forEach(revertChannel)
-    setTimeout(function() {
-        process.exit(0);
-    }, 3000)
-
-});
-
 /*
 .autoRename channelID - Adds a channel to be auto-renamed.
 .changeName channelID newName - Changes the name a channel will revert to.

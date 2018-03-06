@@ -1,0 +1,26 @@
+March 6th 2018, 6:50:31 pm:    Channels sorted.
+
+March 6th 2018, 6:52:39 pm:    Channel with ID 403874145160658945 not found.
+
+March 6th 2018, 6:53:46 pm:    Sorting Overwatch, Position: 1
+
+March 6th 2018, 6:53:46 pm:    Sorting a, Position: 2
+
+March 6th 2018, 6:53:46 pm:    Sorting b, Position: 3
+
+March 6th 2018, 6:53:46 pm:    Sorting c, Position: 4
+
+March 6th 2018, 6:53:46 pm:    Channels sorted.
+
+March 6th 2018, 6:53:56 pm:    Channel with ID 403874145160658945 not found.
+
+March 6th 2018, 7:56:11 pm:    Sorting #Overwatch, Position: 1
+
+March 6th 2018, 7:56:11 pm:    Sorting #a, Position: 2
+
+March 6th 2018, 7:56:11 pm:    Sorting #b, Position: 3
+
+March 6th 2018, 7:56:11 pm:    Sorting #c, Position: 4
+
+March 6th 2018, 7:56:11 pm:    Channels sorted.
+
