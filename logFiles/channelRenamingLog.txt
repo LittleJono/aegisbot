@@ -1,0 +1,90 @@
+March 6th 2018, 11:40:10 pm:    Starting Service
+
+March 6th 2018, 11:40:10 pm:    SyntaxError: Unexpected token u in JSON at position 0
+
+March 6th 2018, 11:40:28 pm:    TypeError: Cannot read property 'guilds' of undefined
+
+March 6th 2018, 11:40:39 pm:    Starting Service
+
+March 6th 2018, 11:40:39 pm:    SyntaxError: Unexpected token u in JSON at position 0
+
+March 6th 2018, 11:41:27 pm:    ReferenceError: logAndDisplay is not defined
+
+March 6th 2018, 11:42:25 pm:    ReferenceError: logAndDisplay is not defined
+
+March 6th 2018, 11:42:29 pm:    Auto Renamed Channel: Overwatch	 to: 	Stellaris
+
+March 6th 2018, 11:42:34 pm:    Restored Channel: Stellaris	 to: 	Overwatch
+
+March 6th 2018, 11:42:39 pm:    Auto Renamed Channel: Overwatch	 to: 	Stellaris
+
+March 6th 2018, 11:42:44 pm:    Restored Channel: Stellaris	 to: 	Overwatch
+
+March 6th 2018, 11:42:59 pm:    Restored Channel: Overwatch	 to: 	testing123
+
+March 6th 2018, 11:43:09 pm:    Auto Renamed Channel: testing123	 to: 	Stellaris
+
+March 6th 2018, 11:43:15 pm:    Channel: Stellaris REMOVED from Auto Renamer by user: Verilos
+
+March 6th 2018, 11:43:15 pm:    Restored Channel: Stellaris	 to: 	testing123
+
+March 6th 2018, 11:44:22 pm:    ReferenceError: logAndDisplay is not defined
+
+March 6th 2018, 11:45:44 pm:    Auto Renamed Channel: testing123	 to: 	Terraria
+
+March 6th 2018, 11:46:03 pm:    TypeError: Cannot read property 'guilds' of undefined
+
+March 6th 2018, 11:48:08 pm:    Starting Service
+
+March 6th 2018, 11:48:08 pm:    Loaded 1 channels to rename from channelRenamingCashe.txt
+
+March 6th 2018, 11:49:56 pm:    TypeError: Cannot read property 'guilds' of undefined
+
+March 6th 2018, 11:50:14 pm:    Starting Service
+
+March 6th 2018, 11:50:14 pm:    Loaded 1 channels to rename from channelRenamingCashe.txt
+
+March 6th 2018, 11:50:27 pm:    ReferenceError: logAndDisplay is not defined
+
+March 6th 2018, 11:51:02 pm:    TypeError: Cannot read property 'guilds' of undefined
+
+March 6th 2018, 11:51:07 pm:    Starting Service
+
+March 6th 2018, 11:51:07 pm:    Loaded 1 channels to rename from channelRenamingCashe.txt
+
+March 6th 2018, 11:51:13 pm:    Channel: test123 ADDED to Auto Renamer by user: Verilos
+
+March 6th 2018, 11:51:22 pm:    Auto Renamed Channel: test123	 to: 	Terraria
+
+March 6th 2018, 11:51:28 pm:    TypeError: Cannot read property 'guilds' of undefined
+
+March 6th 2018, 11:52:58 pm:    Starting Service
+
+March 6th 2018, 11:52:58 pm:    Loaded 2 channels to rename from channelRenamingCashe.txt
+
+March 6th 2018, 11:53:17 pm:    Restored Channel: Terraria	 to: 	test123
+
+March 6th 2018, 11:53:31 pm:    Starting Service
+
+March 6th 2018, 11:53:31 pm:    Loaded 2 channels to rename from channelRenamingCashe.txt
+
+March 6th 2018, 11:53:36 pm:    Auto Renamed Channel: test123	 to: 	Terraria
+
+March 6th 2018, 11:53:58 pm:    Starting Service
+
+March 6th 2018, 11:53:58 pm:    Loaded 2 channels to rename from channelRenamingCashe.txt
+
+March 6th 2018, 11:54:03 pm:    Restored Channel: Terraria	 to: 	test123
+
+March 7th 2018, 10:41:18 pm:    Starting Service
+
+March 7th 2018, 10:41:18 pm:    Loaded 2 channels to rename from channelRenamingCashe.txt
+
+March 7th 2018, 10:41:54 pm:    Starting Service
+
+March 7th 2018, 10:41:54 pm:    Loaded 2 channels to rename from channelRenamingCashe.txt
+
+March 7th 2018, 10:49:58 pm:    Starting Service
+
+March 7th 2018, 10:49:58 pm:    Loaded 2 channels to rename from channelRenamingCashe.txt
+
