@@ -1,4 +1,4 @@
-config/
+config/config.js
 node_modules/
 casheFiles/
 logFiles/
