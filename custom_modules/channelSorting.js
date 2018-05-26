@@ -32,7 +32,7 @@ var channelSorting = {
                         var childChannels = {};
                         var childChannelNames = [];
                         output = JSON.parse(body);
-                            //console.log(JSON.stringify(output, null, 4))
+                        //console.log(JSON.stringify(output, null, 4))
                         var guildChannels = client.guilds.get(guildID).channels;
 
                         for (channel in output) {

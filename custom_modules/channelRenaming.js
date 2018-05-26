@@ -5,7 +5,7 @@ const fs = require('fs');
 var path = require('path');
 path = path.basename(__filename)
 
-const channelFile = "channelRenamingCashe.txt"
+const channelFile = "casheFiles/channelRenamingCashe.js"
 const guildID = config.guildID //This is correct for Aegis7
 const memberPrefix = "[M]"
 
@@ -208,5 +208,4 @@ module.exports = channelRenaming;
 .listAutoRename - Lists all the channels that are being auto-renamed
 
 channelID can be found by rightclicking on the channel -> 'Copy ID'
-<<<<<<< HEAD
 */

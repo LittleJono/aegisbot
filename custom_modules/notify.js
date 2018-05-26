@@ -28,7 +28,7 @@ function returnDict(array) {
 
 var notify = {
     loadModule: (client) => {
-        fs.readFile("notifyUserBlacklist.js", (err, data) => { //Gets the previous role mappings.
+        fs.readFile("casheFiles/notifyUserBlacklist.js", (err, data) => { //Gets the previous role mappings.
             try {
                 userBlacklist = JSON.parse(data);
                 blacklistedUsers = Object.keys(userBlacklist)
@@ -133,6 +133,7 @@ var notify = {
 }
 
 module.exports = notify;
+
 /*Commands:
 @notify - Makes the bot respond with @here
 .notifyuserblacklistadd user - Blacklists a user from using @notify. Use either the user's ID or tag them ('@Jono').
