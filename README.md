@@ -25,3 +25,6 @@ Folders 'casheFiles' and 'logFiles' will be generated automatically.
 * **Channel Sorting**- Alphabetically sort channels under a specified category.
 
 * **Get Role IDs**- Get the ID of all roles matching a given name.
+
+
+TEST NEW SETUP WITHOUT ANY FOLDERS OR FILES!!!

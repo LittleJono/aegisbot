@@ -15,7 +15,7 @@ var getRoleIDs = {
                 } else if (messageParams[0] == ".getroleid") {
                     var data = client.guilds.get(guildID).roles
                     data.forEach(function(role) {
-                        if (role.name.toLowerCase() == messageParams[1]) {
+                        if (role.name.toLowerCase() == messageParams.slice(1).join(" ")) {
                             message.channel.send(role.name + ": " + role.id);
                         }
                     })

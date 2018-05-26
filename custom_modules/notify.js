@@ -5,6 +5,8 @@ const replyMessage = config.notifyReply;
 const triggerMessage = config.notifyTrigger;
 const logger = require('../functions/logger');
 
+const userBlacklistFile = "cacheFiles/notifyUserBlacklist.js"
+const channelBlacklistFile = "cacheFiles/notifyChannelBlacklist.js"
 var blacklistedUsers = []
 var blacklistedChannels = []
 
@@ -28,7 +30,7 @@ function returnDict(array) {
 
 var notify = {
     loadModule: (client) => {
-        fs.readFile("casheFiles/notifyUserBlacklist.js", (err, data) => { //Gets the previous role mappings.
+        fs.readFile(userBlacklistFile, (err, data) => { //Gets the previous role mappings.
             try {
                 userBlacklist = JSON.parse(data);
                 blacklistedUsers = Object.keys(userBlacklist)
@@ -38,7 +40,7 @@ var notify = {
             }
         });
 
-        fs.readFile("notifyChannelBlacklist.js", (err, data) => { //Gets the previous role mappings.
+        fs.readFile(channelBlacklistFile, (err, data) => { //Gets the previous role mappings.
             try {
                 channelBlacklist = JSON.parse(data);
                 blacklistedChannels = Object.keys(channelBlacklist)
@@ -75,7 +77,7 @@ var notify = {
                     if (blacklistedUsers.indexOf(user) == -1) {
                         blacklistedUsers.push(user)
                         var dictionary = returnDict(blacklistedUsers)
-                        fs.writeFile("notifyUserBlacklist.js", JSON.stringify(dictionary, null, 4), (err) => {
+                        fs.writeFile(userBlacklistFile, JSON.stringify(dictionary, null, 4), (err) => {
                             if (err) {
                                 console.log(err)
                             }
@@ -87,7 +89,7 @@ var notify = {
                     var user = messageArray[1].replace(/\D/g, '');
                     remove(blacklistedUsers, user)
                     var dictionary = returnDict(blacklistedUsers)
-                    fs.writeFile("notifyUserBlacklist.js", JSON.stringify(dictionary, null, 4), (err) => {
+                    fs.writeFile(userBlacklistFile, JSON.stringify(dictionary, null, 4), (err) => {
                         if (err) {
                             console.log(err)
                         }
@@ -99,7 +101,7 @@ var notify = {
                     if (blacklistedChannels.indexOf(channel) == -1) {
                         blacklistedChannels.push(channel)
                         var dictionary = returnDict(blacklistedChannels)
-                        fs.writeFile("notifyChannelBlacklist.js", JSON.stringify(dictionary, null, 4), (err) => {
+                        fs.writeFile(channelBlacklistFile, JSON.stringify(dictionary, null, 4), (err) => {
                             if (err) {
                                 console.log(err)
                             }
@@ -111,7 +113,7 @@ var notify = {
                     var user = messageArray[1].replace(/\D/g, '');
                     remove(blacklistedChannels, user)
                     var dictionary = returnDict(blacklistedChannels)
-                    fs.writeFile("notifyChannelBlacklist.js", JSON.stringify(dictionary, null, 4), (err) => {
+                    fs.writeFile(channelBlacklistFile, JSON.stringify(dictionary, null, 4), (err) => {
                         if (err) {
                             console.log(err)
                         }

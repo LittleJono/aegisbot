@@ -5,7 +5,7 @@ const fs = require('fs');
 var path = require('path');
 path = path.basename(__filename)
 
-const channelFile = "casheFiles/channelRenamingCashe.js"
+const channelFile = "cacheFiles/channelRenamingCashe.js"
 const guildID = config.guildID //This is correct for Aegis7
 const memberPrefix = "[M]"
 
@@ -118,39 +118,49 @@ var channelRenaming = {
         });
 
         client.on('message', msg => {
+            var messageArray = msg.content.toLowerCase().split(" ");
             if (!msg.guild.member(msg.author.id).permissions.has('ADMINISTRATOR')) {
                 return;
             } else
 
-            if (msg.content.slice(0, 12) === '.autoRename ') {
+            if (msg.content.slice(0, 12).toLowerCase() === '.autorename ') {
                 try {
                     channelID = msg.content.slice(12);
-                    channels[channelID] = client.guilds.get(guildID).channels.get(channelID).name;
-                    msg.channel.send('```Channel: ' + channels[channelID] + ' ADDED to Auto Renamer by user: ' + msg.author.username + '```');
-                    logger.log('Channel: ' + channels[channelID] + ' ADDED to Auto Renamer by user: ' + msg.author.username, path);
-                    fs.writeFile(channelFile, JSON.stringify(channels, null, 4), (err) => {
-                        if (err) throw err;
-                    });
+                    if (client.guilds.get(guildID).channels.get(channelID).type == 'voice') {
+                        channels[channelID] = client.guilds.get(guildID).channels.get(channelID).name;
+                        msg.channel.send('```Channel: ' + channels[channelID] + ' ADDED to Auto Renamer by user: ' + msg.author.username + '```');
+                        logger.log('Channel: ' + channels[channelID] + ' ADDED to Auto Renamer by user: ' + msg.author.username, path);
+                        fs.writeFile(channelFile, JSON.stringify(channels, null, 4), (err) => {
+                            if (err) throw err;
+                        });
+                    } else {
+                        msg.channel.send("That channel does not exist or is not a voice channel.")
+                    }
                 } catch (err) {
                     logger.log(err, path);
                 }
             }
 
-            if (msg.content.slice(0, 12) === '.changeName ') {
+            if (messageArray[0] == ".changename") {
                 try {
-                    str = msg.content.slice(12)
-                    var changesID = str.substr(0, str.indexOf(' '))
-                    var changes = str.substr(str.indexOf(' ') + 1)
-                    channels[changesID] = changes
-                    fs.writeFile(channelFile, JSON.stringify(channels, null, 4), (err) => {
-                        if (err) throw err;
-                    });
+
+                    var changesID = messageArray[1]
+                    var changes = messageArray[2]
+                    if(typeof channels[changesID] != 'undefined') {
+                        msg.channel.send("Renamed channel " + [changesID] + " to " + messageArray[2]);
+                        channels[changesID] = changes
+                        fs.writeFile(channelFile, JSON.stringify(channels, null, 4), (err) => {
+                            if (err) throw err;
+                        });
+                    } else {
+                        msg.channel.send("That channel isn't currently auto-renaming.")
+                    }
                 } catch (err) {
                     logger.log(err, path);
                 }
             }
 
-            if (msg.content.slice(0, 18) === '.removeAutoRename ') {
+            if (msg.content.slice(0, 18).toLowerCase() === '.removeautorename ') {
                 try {
                     channelID = msg.content.slice(18);
                     channel = client.guilds.get(guildID).channels.get(channelID)
@@ -166,7 +176,7 @@ var channelRenaming = {
                 }
             }
 
-            if (msg.content === '.listAutoRename') {
+            if (msg.content.toLowerCase() === '.listautorename') {
                 try {
                     replyString = '```Voice channels auto-named:\n\n'
                     for (key in channels) {
