@@ -28,3 +28,6 @@ Folders 'casheFiles' and 'logFiles' will be generated automatically.
 
 
 TEST NEW SETUP WITHOUT ANY FOLDERS OR FILES!!!
+
+
+npm install --save moment, request-promise, request, discord.js

@@ -11,6 +11,14 @@ var fs = require('fs');
 var path = require('path');
 path = path.basename(__filename)
 
+if (!fs.existsSync("logFiles")){
+    fs.mkdirSync("logFiles");
+}
+
+if (!fs.existsSync("cacheFiles")){
+    fs.mkdirSync("cacheFiles");
+}
+
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const token = config.token;

@@ -45,7 +45,7 @@ function updateGameList(client) { //Used to cashe the currently played games.
                         tempGameList[value.presence.game.name].users.push(value.user.username + '#' + value.user.discriminator + '(<@' + value.user.id + '>)')
                     }
                 } catch (err) {
-                    console.log(err)
+                    logger.log(err, path)
                     tempGameList[value.presence.game.name] = 1;
                 }
             }
@@ -180,7 +180,6 @@ var autoRoles = {
                                 myArray.push(match[1] ? match[1] : match[0]);
                             }
                         } while (match != null);
-                        console.log(myArray);
                         var role = myArray[2];
                         //check if roles exists on the server
                         //if so, map the game title to the role.
@@ -197,7 +196,7 @@ var autoRoles = {
                                 message.channel.send("FAIL: You can't map a role with Admin permissions.");
                             }
                             if (blackList.indexOf(matchingRoles[0].name.toLowerCase()) > -1) {
-                                console.log(matchingRoles[0].name.toLowerCase(), role, blackList.indexOf(matchingRoles[0].name.toLowerCase()))
+                                logger.log((matchingRoles[0].name.toLowerCase(), role, blackList.indexOf(matchingRoles[0].name.toLowerCase())), path)
                                 message.channel.send("FAIL: You can't map this role, it is on the blacklist.");
                             }
                         } else {
@@ -236,7 +235,7 @@ var autoRoles = {
 
         client.on('presenceUpdate', function(oldUser, newUser) {
             if (newUser.user.bot) {
-                console.log(newUser.user.username + ' is a bot. Ignoring.');
+                //console.log(newUser.user.username + ' is a bot. Ignoring.');
                 return;
             }
             try {
@@ -249,14 +248,14 @@ var autoRoles = {
                         //console.log("MAPPED: This game is mapped...");
                         //do they already have the role? we shouldn't add it again...
                         if (member.roles.get(roleMap[newUser.presence.game.name.toLowerCase()])) {
-                            console.log('>> ' + newUser.user.username + ' already has role.');
+                            //console.log('>> ' + newUser.user.username + ' already has role.');
                         } else {
                             //they do not, add them to the role
                             if (member.roles.find("name", optOutRoleName)) {
-                                console.log('DENY: ' + newUser.user.username + ' is in Role: `' + optOutRoleName + '`. Cannot assign role.');
+                                //console.log('DENY: ' + newUser.user.username + ' is in Role: `' + optOutRoleName + '`. Cannot assign role.');
                                 return;
                             }
-                            console.log('>>: ' + newUser.user.username + ' has been added to role.');
+                            //console.log('>>: ' + newUser.user.username + ' has been added to role.');
                             member.addRole(roleMap[newUser.presence.game.name.toLowerCase()]);
                         }
                     } /*else {
@@ -264,7 +263,7 @@ var autoRoles = {
                     }*/
                 }
             } catch (err) {
-                console.log(err)
+                logger.log(err, path)
             }
         });
 

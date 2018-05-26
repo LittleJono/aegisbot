@@ -1,0 +1,26 @@
+{
+  "name": "aegisbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "moment": "^2.21.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LittleJono/aegisbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LittleJono/aegisbot/issues"
+  },
+  "homepage": "https://github.com/LittleJono/aegisbot#readme"
+}
