@@ -70,4 +70,4 @@ If you have any ideas for new features and changes or have discovered any bugs p
 2. docker stop aegisbot         (Stop the container)
 3. docker rm aegisbot           (Remove the container)
 4. docker run --restart always --name aegisbot --volume /home/jono/aegisbot/cacheFiles:/aegisbot/cacheFiles -d aegisbot (Starting the bot, make sure cacheFiles folder exists locally)
-5. docker exec -i -t accelerated-back-bot /bin/bash (Look inside the container)
+5. docker exec -i -t aegisbot /bin/bash (Look inside the container)
