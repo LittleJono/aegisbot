@@ -12,7 +12,7 @@ config.getRoleIDs = 1;
 config.autoRoles = 1;
 config.channeRenaming = 1;
 config.channelSorting = 1;
-
+config.unusedChannels = 1;
 
 config.notifyTrigger = "@notify";
 config.notifyReply = "@here";

@@ -4,11 +4,6 @@ var path = require('path');
 path = path.basename(__filename)
 const logger = require('../functions/logger');
 
-
-function getMessages(channels, dataObject) {
-
-}
-
 var unusedChannels = {
     loadModule: (client) => {
         try {
@@ -19,43 +14,52 @@ var unusedChannels = {
                     if (!message.guild.member(message.author.id).permissions.has('ADMINISTRATOR')) {
                         return;
                     } else if (messageParams[0] == ".unusedchannels") {
-                        listOfChannels = message.guild.channels;
-                        var promise = new Promise(function(resolve, reject) {
-                            var arrayOfPromises = [];
-                            listOfChannels.forEach((channel) => {
-                                if (channel.type == "text") {
-                                    var promise = new Promise(function(resolve, reject) {
-                                        channel.fetchMessages({
-                                            limit: 1
-                                        }).then((messages) => {
-                                            messages.forEach((message) => {
-                                                var dataToAdd = {}
-                                                dataToAdd.name = message.channel.name
-                                                dataToAdd.time = (message.createdTimestamp / 1000) / 86400
-                                                dataObject[message.id] = dataToAdd;
+                        if (messageParams[1] == undefined || messageParams < 1) {
+                            message.channel.send("Please enter a number (greater than 0) after that command ('.unusedchannels 5').")
+                        } else {
+                            listOfChannels = message.guild.channels;
+                            var promise = new Promise(function(resolve, reject) {
+                                var arrayOfPromises = [];
+                                listOfChannels.forEach((channel) => {
+                                    if (channel.type == "text") {
+                                        var promise = new Promise(function(resolve, reject) {
+                                            channel.fetchMessages({
+                                                limit: 1
+                                            }).then((messages) => {
+                                                messages.forEach((message) => {
+                                                    var dataToAdd = {}
+                                                    dataToAdd.name = message.channel.name
+                                                    dataToAdd.time = (message.createdTimestamp / 1000) / 86400
+                                                    dataObject[message.id] = dataToAdd;
+                                                })
+                                                resolve(1)
                                             })
-                                            resolve(1)
                                         })
-                                    })
-                                    arrayOfPromises.push(promise);
-                                }
+                                        arrayOfPromises.push(promise);
+                                    }
+                                })
+                                Promise.all(arrayOfPromises).then(() => {
+                                    resolve(1)
+                                });
                             })
-                            Promise.all(arrayOfPromises).then(() => {
-                                resolve(1)
-                            });
-                        })
-                        promise.then(() => {
-                            messageString = "```"
-                            for (key in Object.keys(dataObject)){
-                                newKey = Object.keys(dataObject)[key]
-                                daysSinceLastMessage = Math.floor(((new Date).getTime() / 1000) / 86400 - dataObject[newKey].time)
-                                if (daysSinceLastMessage > 10) {
-                                    messageString += (dataObject[newKey].name + ": " + daysSinceLastMessage + " days \n")
-                                }   
-                            }
-                            messageString += "```"
-                            message.channel.send(messageString)
-                        })
+                            promise.then(() => {
+                                messageString = "```"
+                                for (key in Object.keys(dataObject)) {
+                                    newKey = Object.keys(dataObject)[key]
+                                    daysSinceLastMessage = Math.floor(((new Date).getTime() / 1000) / 86400 - dataObject[newKey].time)
+                                    if (daysSinceLastMessage > messageParams[1]) {
+                                        messageString += (dataObject[newKey].name + ": " + daysSinceLastMessage + " days \n")
+                                    }
+                                }
+                                messageString += "```"
+                                if (messageString == "``````") {
+                                    message.channel.send("There are no channels that haven't been used in the past " + messageParams[1] + " days.")
+                                } else {
+                                    message.channel.send(messageString)
+                                }
+
+                            })
+                        }
                     }
                 } catch (err) {
                     logger.log(err, path)
