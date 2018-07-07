@@ -43,12 +43,23 @@ var unusedChannels = {
                                 });
                             })
                             promise.then(() => {
-                                messageString = "```"
+                                var arrayOfDays = []
                                 for (key in Object.keys(dataObject)) {
                                     newKey = Object.keys(dataObject)[key]
                                     daysSinceLastMessage = Math.floor(((new Date).getTime() / 1000) / 86400 - dataObject[newKey].time)
-                                    if (daysSinceLastMessage > messageParams[1]) {
-                                        messageString += (dataObject[newKey].name + ": " + daysSinceLastMessage + " days \n")
+                                    var newArray = []
+                                    newArray.push(dataObject[newKey].name)
+                                    newArray.push(daysSinceLastMessage)
+                                    arrayOfDays.push(newArray)
+                                }
+                                arrayOfDays.sort(function(a, b) {
+                                    return b[1] - a[1]
+                                })
+                                console.log(arrayOfDays)
+                                var messageString = "```"
+                                for (index in arrayOfDays) {
+                                    if (arrayOfDays[index][1] > messageParams[1]) {
+                                        messageString += ( arrayOfDays[index][0 ]+ ": " + arrayOfDays[index][1] + " days \n")
                                     }
                                 }
                                 messageString += "```"
