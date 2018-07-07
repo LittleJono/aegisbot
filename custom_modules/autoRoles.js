@@ -78,7 +78,6 @@ var autoRoles = {
         fs.readFile(roleMapFile, (err, data) => { //Gets the previous role mappings.
             try {
                 roleMap = JSON.parse(data);
-                console.log(roleMap);
             } catch (err) {
                 //do nothing
             }

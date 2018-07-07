@@ -5,6 +5,7 @@ const getRoleIDs = require('./custom_modules/getRoleIDs')
 const autoRoles = require('./custom_modules/autoRoles')
 const channelRenaming = require('./custom_modules/channelRenaming')
 const channelSorting = require('./custom_modules/channelSorting')
+const unusedChannels = require("./custom_modules/unusedChannels.js")
 const logger = require('./functions/logger');
 
 var fs = require('fs');
@@ -28,6 +29,7 @@ const antiWordMode = config.antiWord;
 const autoRolesMode = config.autoRoles;
 const channelRenamingMode = config.channeRenaming;
 const channelSortingMode = config.channelSorting;
+const unusedChannelsMode = config.unusedChannels;
 
 
 function connectBot() {
@@ -42,22 +44,32 @@ client.on('ready', () => {
     clearInterval(botLoggingIn);
 
     if (notifyMode == 1) {
+        console.log("Loaded notify")
         notify.loadModule(client);
     }
     if (getRoleIDsMode == 1) {
+        console.log("Loaded getRoleIDs")
         getRoleIDs.loadModule(client);
     }
     if (antiWordMode == 1) {
+        console.log("Loaded antiWord")
         antiWord.loadModule(client);
     }
     if (autoRolesMode == 1) {
+        console.log("Loaded autoRoles")
         autoRoles.loadModule(client);
     }
     if (channelRenamingMode == 1) {
+        console.log("Loaded channelRenaming")
         channelRenaming.loadModule(client);
     }
     if (channelSortingMode == 1) {
+        console.log("Loaded channelSorting")
         channelSorting.loadModule(client);
+    }
+    if (unusedChannelsMode == 1) {
+        console.log("Loaded unusedChannels")
+        unusedChannels.loadModule(client);
     }
 });
 
