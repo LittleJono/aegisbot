@@ -2,15 +2,16 @@ var config = require('../config/config');
 var logger = require('../functions/logger');
 const fs = require('fs');
 
-var path = require('path');
+let path = require('path');
 path = path.basename(__filename)
 
 const channelFile = "cacheFiles/channelRenamingCashe.js"
 const guildID = config.guildID //This is correct for Aegis7
 const memberPrefix = "[M]"
+const requiredRoleID = config.notifyRequiredRoleID;
 
-var channels = {};
-var foobar;
+let channels = {};
+let foobar;
 
 function revertChannel(value) {
     try {
@@ -33,7 +34,7 @@ function logElements(value, key, map) {
         if (value.type == 'voice' && value.id in channels) {
             var game = {};
             value.members.forEach(function(value2, key2, map2) {
-                if (value2.roles.find('name', 'Member') != null) { //checks for member
+                if (value2.roles.get(requiredRoleID) != undefined) { //checks for member
                     try {
                         if (value2.presence.game.url == null) {
                             if (isNaN(game[value2.presence.game.name])) {
@@ -196,7 +197,7 @@ var channelRenaming = {
             } catch (err) {
                 logger.log(err, path);
             }
-        }, 5000)
+        }, 1000)
     },
     exit: (client) => {
         try {

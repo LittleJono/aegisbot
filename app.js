@@ -11,6 +11,7 @@ const autoRoles = require('./custom_modules/autoRoles');
 const channelRenaming = require('./custom_modules/channelRenaming');
 const channelSorting = require('./custom_modules/channelSorting');
 const unusedChannels = require('./custom_modules/unusedChannels.js');
+const getWammed = require('./custom_modules/getWammed.js');
 const logger = require('./functions/logger');
 
 path = path.basename(__filename);
@@ -33,6 +34,7 @@ const autoRolesMode = config.autoRoles;
 const channelRenamingMode = config.channeRenaming;
 const channelSortingMode = config.channelSorting;
 const unusedChannelsMode = config.unusedChannels;
+const getWammedMode = config.getWammed;
 
 
 function connectBot() {
@@ -77,6 +79,10 @@ client.on('ready', () => {
   if (unusedChannelsMode === 1) {
     console.log('Loaded unusedChannels');
     unusedChannels.loadModule(client);
+  }
+  if (getWammedMode === 1) {
+    console.log('Loaded getWammed');
+    getWammed.loadModule(client);
   }
 });
 

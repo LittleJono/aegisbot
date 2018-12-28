@@ -11,7 +11,7 @@ const antiWord = {
       try {
         const messageString = message.content.toLowerCase().split().join('').replace(/[^0-9a-z]/gi, '');
         Object.values(wordsToDelete).forEach((string) => {
-          if (messageString.indexOf(wordsToDelete[string]) > -1) {
+          if (messageString.indexOf(string) > -1) {
             logger.log(`Message: ${message.content} from ${message.author.username} deleted.`, path);
             message.delete();
           }
