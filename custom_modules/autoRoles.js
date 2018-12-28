@@ -96,7 +96,6 @@ const autoRoles = {
           const querier = client.guilds.get(guildID).members.get(message.author.id); // Get the Member object
           if (querier.roles.find(x => x.name === 'Moderator') !== null || querier.roles.find(x => x.name === 'Coordinator') !== null || querier.roles.find(x => x.name === 'Administrator') !== null) { // ---------- SAFEGUARD ---------- Checks if user is mod or higher.
             let required;
-            console.log(fields);
             try {
               required = message.content.slice(21); // Get the number
             } catch (err) {
@@ -109,7 +108,6 @@ const autoRoles = {
                 messageFields.push(fields[i]); // If it meets the requirements, add to the games to be sent in the embeds.
               }
               if (Number.parseInt(i, 10) === (fields.length - 1)) { // When the for loop is done.
-                console.log("here");
                 message.channel.send('Number of people playing each game currently:\n'); // Everything below just sends the embedded messages.
                 let count = 19;
                 let oldCount = 0;
@@ -193,12 +191,10 @@ const autoRoles = {
             // check if roles exists on the server
             // if so, map the game title to the role.
             const matchingRoles = client.guilds.get(guildID).roles.filter(x => x.name === role);
-            console.log(matchingRoles.size, role);
             if (matchingRoles.size === 0) {
               message.channel.send('FAIL: There are no roles with that name, make sure character case is correct.');
             } else if (matchingRoles.size === 1) {
               const assignedRole = matchingRoles.values().next().value;
-              console.log(assignedRole);
               if (!assignedRole.hasPermission('ADMINISTRATOR') && blackList.indexOf(assignedRole.name.toLowerCase()) === -1) { // ----------- SAFEGUARD ----------- Checks that the role to be mapped doesn't have admin permissions and the role name isn't in the blackList array
                 roleMap[myArray[1].toLowerCase()] = assignedRole.id;
                 fs.writeFile(roleMapFile, JSON.stringify(roleMap, null, 4), (error) => {
@@ -260,7 +256,6 @@ const autoRoles = {
           if (member.roles.get(roleMap[newUser.presence.game.name.toLowerCase()])) {
             // console.log('>> ' + newUser.user.username + ' already has role.');
           } else if (member.roles.find(x => x.name === optInRoleName)) {
-            console.log(member.roles.find(x => x.name === optInRoleName));
             member.addRole(roleMap[newUser.presence.game.name.toLowerCase()]);
             logger.log(`Assigned ${newUser.presence.game.name.toLowerCase()} to ${newUser.user.username}`, path);
           }
