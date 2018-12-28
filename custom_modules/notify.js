@@ -52,13 +52,14 @@ var notify = {
         client.on('message', message => {
             try {
                 var messageArray = message.content.toLowerCase().split(" ");
+                console.log(messageArray);
                 if (message.content.toLowerCase().includes(triggerMessage)) { //&& !message.content.toLowerCase().includes('`' + triggerMessage + '`') && (message.content.toLowerCase().includes(triggerMessage + ' ') || message.content.length == triggerMessage.length) { //Checks every message to see if it contains the triggerMessage string.
                     if (blacklistedChannels.indexOf(message.channel.id) == -1) {
                         if (blacklistedUsers.indexOf(message.author.id) == -1) {
                             if (message.guild.member(message.author.id).roles.get(requiredRoleID) != undefined) { //Checks that the author of the message has the required role.
                                 var firstIndex = message.content.toLowerCase().indexOf(triggerMessage)
                                 var endIndex = firstIndex + triggerMessage.length
-                                if (message.content.toLowerCase().includes(triggerMessage + ' ')) {
+                                if (message.content.toLowerCase().includes(triggerMessage)) {
                                     message.channel.send(replyMessage); //Reply with the reply message.
                                 } else if (message.content.toLowerCase()[endIndex] == undefined) {
                                     message.channel.send(replyMessage); //Reply with the reply message.

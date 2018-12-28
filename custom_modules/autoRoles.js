@@ -200,7 +200,7 @@ const autoRoles = {
                 fs.writeFile(roleMapFile, JSON.stringify(roleMap, null, 4), (error) => {
                   logger.log(error, path);
                 });
-                message.channel.send(`SUCCESS: Role \`${myArray[2]}\` mapped to game \`"${myArray[1]}\`.`);
+                message.channel.send(`SUCCESS: Role \`${myArray[2]}\` mapped to game \`${myArray[1]}\`.`);
               }
               if (assignedRole.hasPermission('ADMINISTRATOR')) {
                 message.channel.send("FAIL: You can't map a role with Admin permissions.");
