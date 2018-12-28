@@ -52,7 +52,6 @@ var notify = {
         client.on('message', message => {
             try {
                 var messageArray = message.content.toLowerCase().split(" ");
-                console.log(messageArray);
                 if (message.content.toLowerCase().includes(triggerMessage)) { //&& !message.content.toLowerCase().includes('`' + triggerMessage + '`') && (message.content.toLowerCase().includes(triggerMessage + ' ') || message.content.length == triggerMessage.length) { //Checks every message to see if it contains the triggerMessage string.
                     if (blacklistedChannels.indexOf(message.channel.id) == -1) {
                         if (blacklistedUsers.indexOf(message.author.id) == -1) {
