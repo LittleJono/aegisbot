@@ -47,7 +47,7 @@ const botLoggingIn = setInterval(() => {
   connectBot();
 }, 5000);
 
-client.on('ready', () => {
+client.once('ready', () => {
   console.log('Bot has connected.');
   logger.log('Bot has connected.', path);
   clearInterval(botLoggingIn);
