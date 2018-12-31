@@ -219,7 +219,9 @@ const autoRoles = {
           const params = message.content.toLowerCase().split(' ');
           if (message.guild.member(message.author.id).permissions.has('ADMINISTRATOR')) {
             delete roleMap[params[1]];
-            fs.writeFile(roleMapFile, JSON.stringify(roleMap, null, 4));
+            fs.writeFile(roleMapFile, JSON.stringify(roleMap, null, 4), (err) => {
+              if (err) logger.log(err);
+            });
           }
         }
 
