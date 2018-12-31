@@ -218,9 +218,11 @@ const autoRoles = {
         if (messageParams[0] === '.removerolemapping') {
           const params = message.content.toLowerCase().split(' ');
           if (message.guild.member(message.author.id).permissions.has('ADMINISTRATOR')) {
-            delete roleMap[params[1]];
+            delete roleMap[params.slice(1).join(' ')];
+            console.log(params.slice(1).join(' '));
             fs.writeFile(roleMapFile, JSON.stringify(roleMap, null, 4), (err) => {
               if (err) logger.log(err);
+              console.log(roleMap);
             });
           }
         }
