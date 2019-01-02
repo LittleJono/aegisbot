@@ -198,7 +198,7 @@ const autoRoles = {
               if (!assignedRole.hasPermission('ADMINISTRATOR') && blackList.indexOf(assignedRole.name.toLowerCase()) === -1) { // ----------- SAFEGUARD ----------- Checks that the role to be mapped doesn't have admin permissions and the role name isn't in the blackList array
                 roleMap[myArray[1].toLowerCase()] = assignedRole.id;
                 fs.writeFile(roleMapFile, JSON.stringify(roleMap, null, 4), (error) => {
-                  logger.log(error, path);
+                  if (error) logger.log(error, path);
                 });
                 message.channel.send(`SUCCESS: Role \`${myArray[2]}\` mapped to game \`${myArray[1]}\`.`);
               }
