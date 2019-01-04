@@ -28,7 +28,6 @@ const roleAssignment = {
     });
 
     client.on('message', (message) => {
-      console.log(iamRoles);
       try {
         const messageString = message.content.toLowerCase();
         const role = messageString.split(' ').slice(1).join(' ');
@@ -45,6 +44,7 @@ const roleAssignment = {
           }
           if (iamRoles[role]) {
             client.guilds.get(guildID).members.get(message.author.id).addRole(iamRoles[role]);
+            message.channel.send(`${role} added.`);
           } else {
             message.channel.send("Role doesn't exist or isn't assignable.");
           }
@@ -60,6 +60,7 @@ const roleAssignment = {
           }
           if (iamRoles[role]) {
             client.guilds.get(guildID).members.get(message.author.id).removeRole(iamRoles[role]);
+            message.channel.send(`${role} removed.`);
           } else {
             message.channel.send("Role doesn't exist or isn't removable.");
           }
@@ -73,7 +74,6 @@ const roleAssignment = {
         }
         if (messageString.indexOf('.asar ') === 0) {
           if (message.guild.member(message.author.id).permissions.has('ADMINISTRATOR')) {
-            const matchingRoles = client.guilds.get(guildID).roles.filter(x => x.name.toLowerCase() === role);
             if (matchingRoles.size === 0) {
               message.channel.send('FAIL: There are no roles with that name, make sure character case is correct.');
             } else if (matchingRoles.size === 1) {
@@ -89,7 +89,6 @@ const roleAssignment = {
                 message.channel.send("FAIL: You can't map a role with Admin permissions.");
               }
               if (blackList.indexOf(assignedRole.name.toLowerCase()) > -1) {
-                logger.log((assignedRole.name.toLowerCase(), role, blackList.indexOf(assignedRole.name.toLowerCase())), thePath);
                 message.channel.send("FAIL: You can't map this role, it is on the blacklist.");
               }
             } else {
@@ -99,14 +98,12 @@ const roleAssignment = {
         }
         if (messageString.indexOf('.rsar ') === 0) {
           if (message.guild.member(message.author.id).permissions.has('ADMINISTRATOR')) {
-            const matchingRoles = client.guilds.get(guildID).roles.filter(x => x.name.toLowerCase() === role);
             if (matchingRoles.size === 0) {
               message.channel.send('FAIL: There are no roles with that name, make sure character case is correct.');
             } else if (matchingRoles.size === 1) {
-              const assignedRole = matchingRoles.values().next().value;
               delete iamRoles[role];
               fs.writeFile(iamRolesFile, JSON.stringify(iamRoles, null, 4), (error) => {
-                if (error) logger.log(error, thePath);    
+                if (error) logger.log(error, thePath);
               });
               message.channel.send(`Removed role: ${role}`);
             } else {
