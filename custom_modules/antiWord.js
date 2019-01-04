@@ -14,15 +14,23 @@ const antiWord = {
       try {
         const messageString = message.content.toLowerCase().split().join('');
         if (message.guild.member(message.author.id).roles.get(requiredRoleID) === undefined) {
-          Object.values(wordsToDelete).forEach((string) => {
-            if (messageString.indexOf(string) > -1) {
-              logger.log(`Message: ${message.content} from ${message.author.username} deleted.`, path);
-              message.delete();
-            }
-          });
           if (message.attachments.size > 0) {
             logger.log(`Message: ${message.content} from ${message.author.username} deleted.`, path);
-            message.delete();
+            message.delete()
+              .then((messageTwo) => { logger.log(`Message: ${messageTwo.content} from ${messageTwo.author.username} deleted.`, path); })
+              .catch(console.error);
+          } else {
+            let deleted = 0;
+            Object.values(wordsToDelete).forEach((string) => {
+              if (messageString.indexOf(string) > -1) {
+                if (deleted !== 1) {
+                  deleted = 1;
+                  message.delete()
+                    .then((messageTwo) => { logger.log(`Message: ${messageTwo.content} from ${messageTwo.author.username} deleted.`, path); })
+                    .catch(console.error);
+                }
+              }
+            });
           }
         }
       } catch (err) {
