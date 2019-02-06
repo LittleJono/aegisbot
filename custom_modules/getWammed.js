@@ -8,6 +8,9 @@ const config = require('../config/config'); // Load the configuration from confi
 const adminRoleID = config.staffRoleIDs[0];
 const moderatorRoleID = config.staffRoleIDs[1];
 
+const wamSelf = {
+  '10774058046901862231341234': 'jono'
+}
 
 const getWammed = {
   loadModule: (client) => {
@@ -15,7 +18,10 @@ const getWammed = {
       try {
         const messageString = message.content.toLowerCase();
         if (messageString.indexOf('.wam ') === 0) {
-          if (message.guild.member(message.author.id).roles.get(adminRoleID) !== undefined || message.guild.member(message.author.id).roles.get(moderatorRoleID) !== undefined) { // not correct
+          if (wamSelf[message.author.id]) {
+            logger.log(`wamming <@!${message.author.id}>`, thePath);
+            message.channel.send(`Get wammed, <@!${message.author.id}>!`);
+          } else if (message.guild.member(message.author.id).roles.get(adminRoleID) !== undefined || message.guild.member(message.author.id).roles.get(moderatorRoleID) !== undefined) { // not correct
             const wammedUser = messageString.split(' ')[1];
             logger.log(`wamming ${wammedUser}`, thePath);
             message.channel.send(`Get wammed, ${wammedUser}!`);
