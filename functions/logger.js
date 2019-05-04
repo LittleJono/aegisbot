@@ -15,9 +15,9 @@ const logger = {
       console.log(`The logger is broken:    ${theError}`);
     });
     if (err.stack) {
-      stream.write(`${moment().format('MMMM Do YYYY, h:mm:ss a')}: ${err.stack}\n\n`);
+      stream.write(`${moment().format('MMMM Do YYYY, h:mm:ss a')}: ${JSON.stringify(err.stack)}\n\n`);
     } else {
-      stream.write(`${moment().format('MMMM Do YYYY, h:mm:ss a')}: ${err}\n\n`);
+      stream.write(`${moment().format('MMMM Do YYYY, h:mm:ss a')}: ${JSON.stringify(err)}\n\n`);
     }
   }
 };
