@@ -46,6 +46,7 @@ const connectBot = async () => {
     logger.log('Logged in');
   } catch (err) {
     connectBot();
+  }
 }
 
 client.once('ready', () => {
