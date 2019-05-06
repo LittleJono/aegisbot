@@ -39,27 +39,16 @@ const getWammedMode = config.getWammed;
 const roleAssignmentMode = config.roleAssignment;
 
 
-const connectBot = () => {
-  logger.log('Attempting to connect.', path);
-  client.login(token);
-}
-
-connectBot();
-
-let loginLoop;
-
-const botLoggingIn = () => {
-  loginLoop = setInterval(() => {
+const connectBot = async () => {
+  try {
+    logger.log('Attempting to connect.', path);
+    await client.login(token);
+    logger.log('Logged in');
+  } catch (err) {
     connectBot();
-  }, 5000);
 }
-
-botLoggingIn();
 
 client.once('ready', () => {
-  console.log('Bot has connected.');
-  logger.log('Bot has connected.', path);
-  clearInterval(loginLoop);
 
   if (notifyMode === 1) {
     console.log('Loaded notify');
@@ -99,6 +88,7 @@ client.once('ready', () => {
   }
 });
 
+
 process.on('SIGINT', () => {
   console.log('Received SIGINT... Shutting down');
   logger.log('Received SIGINT... Shutting down', path);
@@ -112,5 +102,5 @@ process.on('uncaughtException', async (error) => {
   console.log(`Caught exception: ${error}`);
   logger.log(error, path);
   await client.destroy();
-  botLoggingIn();
+  connectBot();
 });
