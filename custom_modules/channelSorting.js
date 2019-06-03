@@ -1,79 +1,82 @@
+const rp = require('request-promise');
+const _ = require('lodash');
+let path = require('path');
+const config = require('../config/config');
+const logger = require('../functions/logger');
 
-var rp = require('request-promise');
-var config = require('../config/config');
-var token = config.token;
-var guildID = config.guildID;
-var logger = require("../functions/logger");
+const { token } = config;
+const { guildID } = config;
 
-var path = require('path');
 path = path.basename(__filename);
 
-
-var options = {
-	method: 'GET',
-	uri: 'https://discordapp.com/api/guilds/' + guildID + '/channels',
-	headers: {
-		'Authorization': 'Bot ' + token,
-		'User-Agent': 'DiscordBot (*, *)'
-	}
+const options = {
+  method: 'GET',
+  uri: `https://discordapp.com/api/guilds/${guildID}/channels`,
+  headers: {
+    Authorization: `Bot ${token}`,
+    'User-Agent': 'DiscordBot (*, *)'
+  }
 };
 
-var channelSorting = {
-	loadModule: (client) => {
-		client.on("message", (message) => {
-			try {
-			var messageParams = message.content.toLowerCase().split(" ");
-			if (!message.guild.member(message.author.id).permissions.has('ADMINISTRATOR')) {
-				return;
-			} else if (messageParams[0] == ".sortchannels") {
-				var parentChannelID = messageParams[1];
-				rp(options)
-					.then(function(body) {
-						var childChannels = {};
-						var childChannelNames = [];
-						output = JSON.parse(body);
-						//console.log(JSON.stringify(output, null, 4))
-						var guildChannels = client.guilds.get(guildID).channels;
+const channelSorting = {
+  loadModule: (client) => {
+    client.on('message', (message) => {
+      try {
+        const messageParams = message.content.toLowerCase().split(' ');
 
-						for (channel in output) {
-							if (output[channel].parent_id == parentChannelID) {
-								childChannelNames.push(output[channel].name)
-								childChannels[output[channel].name] = {
-									"id": output[channel].id,
-									"position": output[channel].position
-								}
-							}
-						}
-						if (childChannelNames.length == 0) {
-							message.channel.send("Cannot find channel with that ID.");
-							logger.log("Channel with ID " + parentChannelID + " not found.", path);
-							return;
-						} else {
-							childChannelNames = childChannelNames.sort();
-							var count = 1;
-							for (name in childChannelNames) {
-								var actualName = childChannelNames[name];
-								logger.log('Sorting #' + actualName + ', Position: ' + count, path);
-								var channel = guildChannels.get(childChannels[actualName].id);
-								channel.edit({
-									position: count,
-									bitrate: 96000
-								});
-								count += 1;
-							}
-							message.channel.send("Channels sorted.");
-							logger.log("Channels sorted.", path);
-						}
-					})
-					.catch(function(err) {
-						logger.log(err, path);
-					});
-			}
-		} catch (err) {
-			logger.log(err, path);
-		}
-		});
-	}
+        if (!message.guild.member(message.author.id).permissions.has('ADMINISTRATOR')) return;
+
+        if (messageParams[0] === '.sortchannels') {
+          const parentChannelID = messageParams[1];
+          rp(options)
+            .then((body) => {
+              const childChannels = {};
+              const childChannelNames = [];
+              const output = JSON.parse(body);
+              // console.log(JSON.stringify(output, null, 4))
+              const guildChannels = client.guilds.get(guildID).channels;
+
+              _.forEach(output, (channel) => {
+                if (channel.parent_id === parentChannelID) {
+                  childChannelNames.push(channel.name);
+                  childChannels[channel.name] = {
+                    id: channel.id,
+                    position: channel.position
+                  };
+                }
+              });
+
+              if (childChannelNames.length === 0) {
+                message.channel.send('Cannot find channel with that ID.');
+                logger.log(`Channel with ID ${parentChannelID} not found.`, path);
+                return;
+              }
+
+              const childChannelNamesSorted = childChannelNames.sort();
+              let count = 1;
+              _.forEach(childChannelNamesSorted, (name) => {
+                const actualName = name;
+                logger.log(`Sorting #${actualName} Position: ${count}`, path);
+                const channel = guildChannels.get(childChannels[actualName].id);
+                channel.edit({
+                  position: count,
+                  bitrate: 96000
+                });
+                count += 1;
+              });
+
+              message.channel.send('Channels sorted.');
+              logger.log('Channels sorted.', path);
+            })
+            .catch((err) => {
+              logger.log(err, path);
+            });
+        }
+      } catch (err) {
+        logger.log(err, path);
+      }
+    });
+  }
 };
 
 module.exports = channelSorting;
