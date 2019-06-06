@@ -7,7 +7,7 @@ path = path.basename(__filename)
 
 const channelFile = "cacheFiles/channelRenamingCashe.js"
 const guildID = config.guildID //This is correct for Aegis7
-const memberPrefix = "[M]"
+const memberPrefix = "[M] "
 const requiredRoleID = config.notifyRequiredRoleID;
 
 let channels = {};

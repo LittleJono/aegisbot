@@ -9,7 +9,7 @@ const adminRoleID = config.staffRoleIDs[0];
 const moderatorRoleID = config.staffRoleIDs[1];
 
 const wamSelf = {
-  '10774058046901862231341234': 'jono'
+  '87324242307203072': 'rainah'
 }
 
 const getWammed = {
