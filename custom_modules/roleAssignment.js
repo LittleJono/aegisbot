@@ -68,7 +68,7 @@ const roleAssignment = {
 
         if (messageString.indexOf('.lsar') === 0) {
           let replyString = '```\n';
-          Object.keys(iamRoles).forEach((name) => { replyString = `${replyString}${name}\n`; });
+          Object.keys(iamRoles).sort().forEach((name) => { replyString = `${replyString}${name}\n`; });
           replyString = `${replyString}\`\`\``;
           message.channel.send(replyString);
         }

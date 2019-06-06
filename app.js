@@ -2,6 +2,7 @@
 const fs = require('fs');
 const _ = require('lodash');
 const Discord = require('discord.js');
+
 let path = require('path');
 path = path.basename(__filename);
 
@@ -55,6 +56,10 @@ const modules = {
     enabled: config.roleAssignment,
     file: require('./custom_modules/roleAssignment.js'),
   },
+  logGuildActions: {
+    enabled: config.logGuildActions,
+    file: require('./custom_modules/logGuildActions'),
+  }
 };
 
 const { token } = config;

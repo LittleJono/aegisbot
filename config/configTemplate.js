@@ -15,10 +15,13 @@ config.channelSorting = 1;
 config.unusedChannels = 1;
 config.getWammed = 1;
 config.roleAssignment = 1;
+config.logGuildActions = 1;
 
 config.notifyTrigger = '@notify';
 config.notifyReply = '@here';
 config.notifyRequiredRoleID = ''; // The role required for people to be able to use '@notify'. Use the '.getroleid' command to get the right ID.
 config.staffRoleIDs = [];
+config.usefulLogChannelID = '';
+config.uselessLogChannelID = '';
 
 module.exports = config;
