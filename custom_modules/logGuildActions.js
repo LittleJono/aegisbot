@@ -34,6 +34,9 @@ const antiWord = {
 
     client.on('channelUpdate', (oldChannel, newChannel) => {
       try {
+        if (newChannel.name === oldChannel.name) {
+          return;
+        }
         const logMessage = `\`\`\`Channel Updated: ${oldChannel.name} -> ${newChannel.name}\`\`\``;
         logger.log(logMessage, path);
         client.guilds.get(guildID).channels.get(uselessLogChannelID).send(logMessage);
@@ -104,7 +107,7 @@ const antiWord = {
 
     client.on('messageDelete', (message) => {
       try {
-        const logMessage = `\`\`\`Message Deleted: ${message}\nAuthor:  ${message.author.tag}, ${message.author.id}\`\`\``;
+        const logMessage = `\`\`\`Message Deleted: ${message}\n  Author:  ${message.author.tag}, ${message.author.id}\`\`\``;
         logger.log(logMessage, path);
         client.guilds.get(guildID).channels.get(usefulLogChannelID).send(logMessage);
       } catch (err) {
