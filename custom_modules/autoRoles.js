@@ -10,9 +10,9 @@
 
 let path = require('path');
 const fs = require('fs');
+const _ = require('lodash');
 const config = require('../config/config'); // Load the configuration from config.js
 const logger = require('../functions/logger');
-
 
 path = path.basename(__filename);
 
@@ -88,7 +88,7 @@ const autoRoles = {
       }
     });
 
-    client.on('message', (message) => {
+    client.on('message', async (message) => {
       try {
         const messageParams = message.content.toLowerCase().split(' ');
         if (messageParams[0] === '.listcurrentlyplayed') { // Lists the currently played games.
@@ -226,16 +226,23 @@ const autoRoles = {
         }
 
         if (messageParams[0] === '.listrolemapping') {
-          const querier = client.guilds.get(guildID).members.get(message.author.id); // Get the Member object
+          const querier = await client.guilds.get(guildID).members.get(message.author.id); // Get the Member object
           if (querier.roles.find(x => x.name === 'Moderator') != null || querier.roles.find(x => x.name === 'Coordinator') != null || querier.roles.find(x => x.name === 'Administrator') != null) { // ---------- SAFEGUARD ---------- Checks if user is mod or higher.
-            let sendString = '```';
+            const roleStrings = [];
             Object.keys(roleMap).forEach((key) => {
-              sendString = sendString.concat(`${key}: ${roleMap[key]}\n`);
+              roleStrings.push(`${key}: ${roleMap[key]}\n`);
             });
-            setTimeout(() => {
-              sendString = sendString.concat('```');
-              message.channel.send(sendString);
-            }, 100);
+            const messageArrays = [[]];
+            roleStrings.forEach((string) => {
+              if (_.last(messageArrays).length > 19) {
+                messageArrays.push([]);
+              }
+              _.last(messageArrays).push(string);
+            });
+            _.forEach(messageArrays, (array) => {
+              const sendString = array.join('\n');
+              message.channel.send(`\`\`\`${sendString}\`\`\``);
+            });
           }
         }
       } catch (err) {
