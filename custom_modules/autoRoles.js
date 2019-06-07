@@ -229,8 +229,8 @@ const autoRoles = {
           const querier = await client.guilds.get(guildID).members.get(message.author.id); // Get the Member object
           if (querier.roles.find(x => x.name === 'Moderator') != null || querier.roles.find(x => x.name === 'Coordinator') != null || querier.roles.find(x => x.name === 'Administrator') != null) { // ---------- SAFEGUARD ---------- Checks if user is mod or higher.
             const roleStrings = [];
-            Object.keys(roleMap).forEach((key) => {
-              roleStrings.push(`${key}: ${roleMap[key]}\n`);
+            Object.keys(roleMap).sort().forEach((key) => {
+              roleStrings.push(`${key}: ${roleMap[key]}`);
             });
             const messageArrays = [[]];
             roleStrings.forEach((string) => {
