@@ -12,15 +12,6 @@ const { guildID } = config;
 
 const antiWord = {
   loadModule: (client) => {
-    client.on('channelCreate', (channel) => {
-      try {
-        const logMessage = `\`\`\`Channel Created: ${channel.name}\`\`\``;
-        logger.log(logMessage, path);
-        client.guilds.get(guildID).channels.get(usefulLogChannelID).send(logMessage);
-      } catch (err) {
-        logger.log(err, path);
-      }
-    });
 
     client.on('channelDelete', (channel) => {
       try {
@@ -45,7 +36,7 @@ const antiWord = {
       }
     });
 
-    client.on('guildBanAdd', (user) => {
+    client.on('guildBanAdd', (guild, user) => {
       try {
         const logMessage = `\`\`\`User Banned: ${user.tag} ${user.id}\`\`\``;
         logger.log(logMessage, path);
@@ -55,7 +46,7 @@ const antiWord = {
       }
     });
 
-    client.on('guildBanRemove', (user) => {
+    client.on('guildBanRemove', (guild, user) => {
       try {
         const logMessage = `\`\`\`User Unbanned: ${user.tag} ${user.id}\`\`\``;
         logger.log(logMessage, path);
@@ -67,7 +58,7 @@ const antiWord = {
 
     client.on('guildMemberAdd', (user) => {
       try {
-        const logMessage = `\`\`\`User Joined: ${user.tag} ${user.id}\`\`\``;
+        const logMessage = `\`\`\`User Joined: ${user.user.tag} ${user.user.id}\`\`\``;
         logger.log(logMessage, path);
         client.guilds.get(guildID).channels.get(usefulLogChannelID).send(logMessage);
       } catch (err) {
@@ -138,16 +129,6 @@ const antiWord = {
     client.on('roleDelete', (role) => {
       try {
         const logMessage = `\`\`\`Role Deleted: ${role.name}\`\`\``;
-        logger.log(logMessage, path);
-        client.guilds.get(guildID).channels.get(usefulLogChannelID).send(logMessage);
-      } catch (err) {
-        logger.log(err, path);
-      }
-    });
-
-    client.on('roleUpdate', (newRole) => {
-      try {
-        const logMessage = `\`\`\`Role Updated: ${newRole.name}\`\`\``;
         logger.log(logMessage, path);
         client.guilds.get(guildID).channels.get(usefulLogChannelID).send(logMessage);
       } catch (err) {

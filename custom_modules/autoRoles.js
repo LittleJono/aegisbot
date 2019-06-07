@@ -240,7 +240,7 @@ const autoRoles = {
               _.last(messageArrays).push(string);
             });
             _.forEach(messageArrays, (array) => {
-              const sendString = array.join('\n');
+              const sendString = array.join('');
               message.channel.send(`\`\`\`${sendString}\`\`\``);
             });
           }
