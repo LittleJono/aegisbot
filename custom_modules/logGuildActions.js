@@ -68,7 +68,7 @@ const antiWord = {
 
     client.on('guildMemberRemove', (user) => {
       try {
-        const logMessage = `\`\`\`User Left: ${user.tag} ${user.id}\`\`\``;
+        const logMessage = `\`\`\`User Left: ${user.user.tag} ${user.user.id}\`\`\``;
         logger.log(logMessage, path);
         client.guilds.get(guildID).channels.get(usefulLogChannelID).send(logMessage);
       } catch (err) {
@@ -78,7 +78,7 @@ const antiWord = {
 
     client.on('guildMemberUpdate', (oldUser, newUser) => {
       try {
-        const logMessage = `\`\`\`User Updated: ${newUser.tag}, ${newUser.id}\`\`\``;
+        const logMessage = `\`\`\`User Updated: ${newUser.user.tag}, ${newUser.user.id}\`\`\``;
         logger.log(logMessage, path);
         client.guilds.get(guildID).channels.get(uselessLogChannelID).send(logMessage);
       } catch (err) {
