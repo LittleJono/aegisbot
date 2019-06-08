@@ -13,7 +13,7 @@ const antiWord = {
     client.on('message', (message) => {
       try {
         const messageString = message.content.toLowerCase().split().join('');
-        if (message.guild.member(message.author.id).roles.get(requiredRoleID) === undefined) {
+        if (message.guild.member(message.author.id).roles.get(requiredRoleID) === undefined && !message.author.bot) {
           if (message.attachments.size > 0) {
             logger.log(`Message: ${message.content} from ${message.author.username} deleted.`, path);
             message.delete()
