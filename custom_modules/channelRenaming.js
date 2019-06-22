@@ -69,7 +69,7 @@ function logElements(value, key, map) {
                     if (value.name != channels[value.id]) {
                         value.edit({
                             name: channels[value.id],
-                            bitrate: 96000
+                            bitrate: 128000
                         })
                         logger.log('Restored Channel: ' + value.name + '\t to: \t' + channels[value.id], path);
                     }
@@ -82,7 +82,7 @@ function logElements(value, key, map) {
                         }
                         value.edit({
                             name: gameValue,
-                            bitrate: 96000
+                            bitrate: 128000
                         })
                         logger.log('Auto Renamed Channel: ' + channels[value.id] + '\t to: \t' + gameValue, path);
                     }
@@ -91,7 +91,7 @@ function logElements(value, key, map) {
                 if (value.name != channels[value.id]) {
                     value.edit({
                         name: channels[value.id],
-                        bitrate: 96000
+                        bitrate: 128000
                     })
                     logger.log('Restored Channel: ' + value.name + '\t to: \t' + channels[value.id], path);
                 }
