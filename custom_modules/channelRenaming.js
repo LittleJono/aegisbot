@@ -19,7 +19,7 @@ function revertChannel(value) {
             if (value.name != channels[value.id]) {
                 value.edit({
                     name: channels[value.id],
-                    bitrate: 96000
+                    bitrate: 128000
                 })
                 logger.log('Restored Channel: ' + value.name + '\t to: \t' + channels[value.id], path);
             }
