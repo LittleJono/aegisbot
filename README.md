@@ -5,7 +5,6 @@ aegisbot is a bot that provides some useful administrative features to Discord.
 NOTE: This code is a work in progress, the code needs to be refactored and there will probably be the odd bug.
 
 
-
 ## Installation:
 1. Download the zip and uncompress or clone the repo.
 2. Ensure you have [node](https://nodejs.org/en/) installed (version 8+).
