@@ -98,7 +98,7 @@ function logElements(value) {
           logger.log(`Auto Renamed Channel: ${channels[value.id]}\t to: \t${gameValue}`, path);
         }
       }
-      if (value.name !== channels[value.id]) {
+      else if (value.name !== channels[value.id]) {
         value.edit({
           name: channels[value.id],
           bitrate: requiredBitrate
