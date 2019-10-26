@@ -48,6 +48,9 @@ function logElements(value) {
         if (value2.roles.get(requiredRoleID)) {
           // checks for member
           try {
+            if (value2.presence.game.name === 'Custom Status') {
+              return;
+            }
             if (value2.presence.game.url == null) {
               if (isNaN(game[value2.presence.game.name])) {
                 game[value2.presence.game.name] = 1;
